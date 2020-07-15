@@ -4,7 +4,7 @@ let url = 'https://ron-swanson-quotes.herokuapp.com/v2/quotes';
 var xhrbtn = document.querySelector("#xhr");
 var fetchbtn = document.querySelector("#fetch");
 var jquerybtn = document.querySelector("#jquery");
-var axiosbtn = document.querySelector('axios');
+var axiosbtn = document.querySelector('#axios');
 
 var display = document.querySelector("#quote")
 
@@ -31,6 +31,29 @@ fetchbtn.addEventListener("click", function () {
         .catch(function () {
             alert("Error!")
         })
+});
+
+$('#jquery').click(function () {
+    $.getJSON(url)
+        .done(function (data) {
+            console.log(data[0])
+            $("#quote").text(data[0]);
+        })
 })
 
-jquerybtn.addEventListener("click", function () {
+
+// axiosbtn.addEventListener("click", function () {
+//     axios.get(url)
+//         .then(function (res) {
+//             console.log(res.data[0])
+//         })
+// })
+axiosbtn.addEventListener("click", function () {
+    axios.get(url)
+        .then(function (res) {
+            display.innerText = res.data[0];
+        })
+        .catch(function () {
+            alert("ERROR!");
+        })
+});
